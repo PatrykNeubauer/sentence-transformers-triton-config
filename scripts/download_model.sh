@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 <model_name>"
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 <model_name> <save_path>"
   exit 1
 fi
 
-optimum-cli export onnx --model $1 temp/model/
+optimum-cli export onnx --model $1 $2
