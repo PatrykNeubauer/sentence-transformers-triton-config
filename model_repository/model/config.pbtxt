@@ -1,0 +1,33 @@
+name: "model"
+platform: "onnxruntime_onnx"
+backend: "onnxruntime"
+default_model_filename: "model.onnx"
+max_batch_size: 0
+input [
+  {
+    name: "input_ids"
+    data_type: TYPE_INT64
+    dims: [ -1, -1 ]
+  },
+{
+    name: "attention_mask"
+    data_type: TYPE_INT64
+    dims: [ -1, -1 ]
+  }
+]
+output [
+  {
+    name: "output_0"
+    data_type: TYPE_FP32
+    dims: [ -1, 384 ]
+    # 1st dimension: batch size, 2nd: embedding dimension size (depends on model). 
+    # TODO: Make it dynamic or edit through a script. Remember to edit ensemble config accordingly.
+  }
+]
+
+instance_group [
+    {
+      count: 1
+      kind: KIND_GPU
+    }
+]
