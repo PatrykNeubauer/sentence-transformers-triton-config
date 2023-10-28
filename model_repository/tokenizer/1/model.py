@@ -14,7 +14,8 @@ class TritonPythonModel:
         path: str = os.path.join(args["model_repository"], args["model_version"])
         self.tokenizer = AutoTokenizer.from_pretrained(path)
 
-    def execute(self, requests) -> List[List[pb_utils.Tensor]]:
+    # Returns List[List[pb_utils.Tensor]], but bug in triton utils causes crashes on typing.
+    def execute(self, requests):
         responses = []
         for request in requests:
             query = [
