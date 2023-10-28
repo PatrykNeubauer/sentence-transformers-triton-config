@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --shm-size=5g --ulimit memlock=-1 -p8000:8000 -p8001:8001 -p8002:8002 --name triton_tts_server --rm -v /Users/patrykneubauer/PycharmProjects/sentence-transformers-triton-config/model_repository:/model_repository nvcr.io/nvidia/tritonserver:23.09-py3 tritonserver --model-repository /model_repository
